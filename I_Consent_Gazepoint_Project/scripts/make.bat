@@ -1,0 +1,6 @@
+call dirs.bat
+call raw.bat
+call process.bat
+call collate.bat
+call stats.bat
+REM call graph.bat

@@ -1,0 +1,15 @@
+SOR_es30xsa-adhd_ctrl-2-9-gender-F08-neutral.raw
+    |       |         | |   |    |   |
+    |       |         | |   |    |   +-------------- ttype: expression (1 of 7)
+    |       |         | |   |    |
+    |       |         | |   |    +----------- ftype: image id
+    |       |         | |   |
+    |       |         | |   +------ task: gender, emotion
+    |       |         | |
+    |       |         | +--- trial
+    |       |         |
+    |       |         +--- block
+    |       |
+    |       +--- group
+    |
+    +--- subj

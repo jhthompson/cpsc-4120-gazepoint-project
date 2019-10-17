@@ -1,0 +1,102 @@
+R SCRIPTS - OVERVIEW
+------------------------------
+------------------------------
+
+f_AOI.R
+f_general.R
+tm.R
+K_coefficient.R
+
+
+
+
+Content of the scripts and notes:
+
+f_AOI.R
+------------------------------
+###
+#####   R SCRIPT for Analysis of
+###   
+#####   1) FIXATION COUNT on AOIs (especially EYES)
+#####   2) DWELL TIME on AOIs (especially EYES)
+#####   3) FREQUENCY OF INITIAL FIXATION after stimulus onset on AOIs (especially EYES)
+#####   4) NUMBER OF TRANSITIONS BETWEEN AOIs
+#####      >> checking proportion of fixations within AOIs
+###
+
+- Analysis of effect of displayed emotion (ttype) on all measures
+- Plots and stats
+
+
+
+f_general.R
+------------------------------
+###
+#####   R SCRIPT for Analysis of
+###   
+#####   1) MICROSACCADES
+#####   >> amplitude
+#####   >> rate = (microsaccade number / total fixation duration)
+#####   .
+#####   2) FIXATIONS
+#####   >> number per trial
+#####   >> duration
+#####   .
+#####   3) PUPIL DILATION
+#####   >> pICA
+###
+
+- Analysis of effect of displayed emotion (ttype) on all measures
+- Plots and stats
+
+	There is an effect of emotion on fixation nr per trial which makes
+	sense because this measure is similar to number of transitions between
+	AOIs. Moreover, there's also an effect of emotion of fixation duration
+	which fits the previous result. And there is an effect on pICA.
+
+
+tm.R
+------------------------------
+###
+#####   R SCRIPT for Analysis of
+###   
+#####   - TMs
+#####   - transition entropy
+###
+
+- Transition matrices overall and separate for each emotion (ttype) 
+- Analysis of effect of displayed emotion (ttype) on all measures
+- Plots and stats
+
+	No effect of emotion (ttype).
+
+	
+
+K_coefficient.R
+------------------------------
+###
+#####   R SCRIPT for Analysis of
+###   
+#####   - K coefficient
+#####   => ambient/focal
+###
+
+- Analysis of effect of displayed emotion (ttype) on K coefficient mean (for the whole trial duration)
+  Plots and stats
+- Analysis and plots for K coefficient for the five 500ms intervals during stimulus presentation (timecut.5)
+
+	No effect of emotion (ttype).
+
+
+
+R Scripts that are used by the 'main' R scripts above:
+------------------------------------------------------------
+customFunc.R
+lrheatmap.R
+TMSP.R
+
+
+
+
+
+
