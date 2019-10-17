@@ -1,10 +1,10 @@
 set PYTHON=python
 
-set WIDTH=1024
-set HEIGHT=768
-set HERTZ=500
-set DIST=23.62
-set SCREEN=19
+set WIDTH=1680
+set HEIGHT=1050
+set HERTZ=60
+set DIST=22.44 REM 57 cm
+set SCREEN=22
 
 set INDIR=../../data/tutorial_etra18/
 set IMGDIR= ../../stimulus/static/screenshots/
