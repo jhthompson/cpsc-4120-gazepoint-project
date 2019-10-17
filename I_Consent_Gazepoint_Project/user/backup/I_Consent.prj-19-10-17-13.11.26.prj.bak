@@ -35,6 +35,7 @@ Media:
        Path:"penn-state-instructions.rtf", Duration:0., Randomize:0,
        Scale:1, BK_RED:255, BK_GREEN:255, BK_BLUE:255 }
 UserData:
-   []
+   - { Id:25, Name:User 25, Age:0, Gender:M, OffsetX:0., OffsetY:0.,
+       Color:[ 0., 0., 255., 0. ], DataRecords:10300 }
 AOI:
    []
