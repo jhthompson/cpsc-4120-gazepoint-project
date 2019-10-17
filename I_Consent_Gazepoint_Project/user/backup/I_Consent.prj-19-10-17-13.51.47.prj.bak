@@ -40,6 +40,6 @@ UserData:
    - { Id:27, Name:User 27, Age:0, Gender:M, OffsetX:0., OffsetY:0.,
        Color:[ 0., 255., 0., 0. ], DataRecords:7487 }
    - { Id:28, Name:User 28, Age:0, Gender:M, OffsetX:0., OffsetY:0.,
-       Color:[ 44., 0., 0., 0. ], DataRecords:8862 }
+       Color:[ 44., 0., 0., 0. ], DataRecords:0 }
 AOI:
    []
