@@ -1,0 +1,40 @@
+%YAML:1.0
+---
+FileVersion: 2
+NextUserId: 21
+NextMediaId: 21
+NextAOIId: 0
+NextWebId: 0
+Media:
+   - { Id:12, PlaybackIndex:3, Name:page1, Type:0,
+       Path:"page1-811x1050.jpg", Duration:0., Randomize:0, Scale:1,
+       BK_RED:50, BK_GREEN:50, BK_BLUE:50 }
+   - { Id:13, PlaybackIndex:4, Name:page2, Type:0,
+       Path:"page2-811x1050.jpg", Duration:0., Randomize:0, Scale:1,
+       BK_RED:50, BK_GREEN:50, BK_BLUE:50 }
+   - { Id:14, PlaybackIndex:5, Name:page3, Type:0,
+       Path:"page3-811x1050.jpg", Duration:0., Randomize:0, Scale:1,
+       BK_RED:50, BK_GREEN:50, BK_BLUE:50 }
+   - { Id:15, PlaybackIndex:8, Name:page4, Type:0,
+       Path:"penn-state-811x1050.jpg", Duration:0., Randomize:0, Scale:1,
+       BK_RED:50, BK_GREEN:50, BK_BLUE:50 }
+   - { Id:16, PlaybackIndex:0, Name:calibration-verification-instructions,
+       Type:6, Path:"calibration-verification-instructions.rtf",
+       Duration:0., Randomize:0, Scale:1, BK_RED:255, BK_GREEN:255,
+       BK_BLUE:255 }
+   - { Id:17, PlaybackIndex:1, Name:calibration-verification-image,
+       Type:0, Path:"composite-grid-1680x1050.png", Duration:0.,
+       Randomize:0, Scale:1, BK_RED:50, BK_GREEN:50, BK_BLUE:50 }
+   - { Id:18, PlaybackIndex:6, Name:page4-instructions, Type:6,
+       Path:"experiment-consent-approval-instructions.rtf", Duration:0.,
+       Randomize:0, Scale:1, BK_RED:255, BK_GREEN:255, BK_BLUE:255 }
+   - { Id:19, PlaybackIndex:2, Name:page1-instructions, Type:6,
+       Path:"consent-form-instructions.rtf", Duration:0., Randomize:0,
+       Scale:1, BK_RED:255, BK_GREEN:255, BK_BLUE:255 }
+   - { Id:20, PlaybackIndex:7, Name:page4-instructions-part2, Type:6,
+       Path:"penn-state-instructions.rtf", Duration:0., Randomize:0,
+       Scale:1, BK_RED:255, BK_GREEN:255, BK_BLUE:255 }
+UserData:
+   []
+AOI:
+   []

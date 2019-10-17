@@ -1,0 +1,37 @@
+%YAML:1.0
+---
+FileVersion: 2
+NextUserId: 14
+NextMediaId: 16
+NextAOIId: 0
+NextWebId: 0
+Media:
+   - { Id:12, PlaybackIndex:0, Name:page1, Type:0,
+       Path:"page1-811x1050.jpg", Duration:0., Randomize:0, Scale:1,
+       BK_RED:50, BK_GREEN:50, BK_BLUE:50 }
+   - { Id:13, PlaybackIndex:1, Name:page2, Type:0,
+       Path:"page2-811x1050.jpg", Duration:0., Randomize:0, Scale:1,
+       BK_RED:50, BK_GREEN:50, BK_BLUE:50 }
+   - { Id:14, PlaybackIndex:2, Name:page3, Type:0,
+       Path:"page3-811x1050.jpg", Duration:0., Randomize:0, Scale:1,
+       BK_RED:50, BK_GREEN:50, BK_BLUE:50 }
+   - { Id:15, PlaybackIndex:3, Name:page4, Type:0,
+       Path:"penn-state-811x1050.jpg", Duration:0., Randomize:0, Scale:1,
+       BK_RED:50, BK_GREEN:50, BK_BLUE:50 }
+UserData:
+   - { Id:7, Name:User 7, Age:0, Gender:M, OffsetX:0., OffsetY:0.,
+       Color:[ 0., 0., 255., 0. ], DataRecords:405 }
+   - { Id:8, Name:User 8, Age:0, Gender:M, OffsetX:0., OffsetY:0.,
+       Color:[ 0., 255., 0., 0. ], DataRecords:517 }
+   - { Id:9, Name:User 9, Age:0, Gender:M, OffsetX:0., OffsetY:0.,
+       Color:[ 44., 0., 0., 0. ], DataRecords:659 }
+   - { Id:10, Name:User 10, Age:0, Gender:M, OffsetX:0., OffsetY:0.,
+       Color:[ 185., 26., 255., 0. ], DataRecords:278 }
+   - { Id:11, Name:User 11, Age:0, Gender:M, OffsetX:0., OffsetY:0.,
+       Color:[ 0., 211., 255., 0. ], DataRecords:99 }
+   - { Id:12, Name:User 12, Age:0, Gender:M, OffsetX:0., OffsetY:0.,
+       Color:[ 0., 88., 0., 0. ], DataRecords:105 }
+   - { Id:13, Name:User 13, Age:0, Gender:M, OffsetX:0., OffsetY:0.,
+       Color:[ 255., 132., 132., 0. ], DataRecords:0 }
+AOI:
+   []

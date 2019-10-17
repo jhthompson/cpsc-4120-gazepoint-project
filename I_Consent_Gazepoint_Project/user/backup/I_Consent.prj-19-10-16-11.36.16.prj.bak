@@ -1,0 +1,27 @@
+%YAML:1.0
+---
+FileVersion: 2
+NextUserId: 9
+NextMediaId: 9
+NextAOIId: 0
+NextWebId: 0
+Media:
+   - { Id:4, PlaybackIndex:0, Name:page1-orig, Type:0,
+       Path:"page1-orig.jpg", Duration:0., Randomize:0, Scale:1,
+       BK_RED:50, BK_GREEN:50, BK_BLUE:50 }
+   - { Id:5, PlaybackIndex:1, Name:page1-resized, Type:0,
+       Path:"page1-resized.jpg", Duration:10., Randomize:0, Scale:1,
+       BK_RED:50, BK_GREEN:50, BK_BLUE:50 }
+   - { Id:7, PlaybackIndex:2, Name:page2-orig, Type:0,
+       Path:"page2-orig.jpg", Duration:10., Randomize:0, Scale:1,
+       BK_RED:50, BK_GREEN:50, BK_BLUE:50 }
+   - { Id:8, PlaybackIndex:3, Name:page2-resized, Type:0,
+       Path:"page2-resized.jpg", Duration:10., Randomize:0, Scale:1,
+       BK_RED:50, BK_GREEN:50, BK_BLUE:50 }
+UserData:
+   - { Id:7, Name:User 7, Age:0, Gender:M, OffsetX:0., OffsetY:0.,
+       Color:[ 0., 0., 255., 0. ], DataRecords:405 }
+   - { Id:8, Name:User 8, Age:0, Gender:M, OffsetX:0., OffsetY:0.,
+       Color:[ 0., 255., 0., 0. ], DataRecords:0 }
+AOI:
+   []
