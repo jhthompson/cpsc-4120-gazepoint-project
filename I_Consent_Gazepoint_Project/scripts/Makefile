@@ -42,8 +42,8 @@ YTILES = 3
 #XTILES = 16
 #YTILES = 16
 
-INDIR = ../../data/tutorial_etra18/
-IMGDIR = ../../stimulus/static/screenshots/
+INDIR = ../result/
+IMGDIR = ../src/
 
 PLTDIR = ./plots/
 OUTDIR = ./data/
