@@ -1,7 +1,7 @@
 %YAML:1.0
 ---
 FileVersion: 2
-NextUserId: 28
+NextUserId: 27
 NextMediaId: 21
 NextAOIId: 0
 NextWebId: 0
@@ -36,8 +36,6 @@ Media:
        Scale:1, BK_RED:255, BK_GREEN:255, BK_BLUE:255 }
 UserData:
    - { Id:26, Name:User 26, Age:0, Gender:M, OffsetX:0., OffsetY:0.,
-       Color:[ 0., 0., 255., 0. ], DataRecords:14244 }
-   - { Id:27, Name:User 27, Age:0, Gender:M, OffsetX:0., OffsetY:0.,
-       Color:[ 0., 255., 0., 0. ], DataRecords:7487 }
+       Color:[ 0., 0., 255., 0. ], DataRecords:0 }
 AOI:
    []
