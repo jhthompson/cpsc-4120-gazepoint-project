@@ -1,4 +1,4 @@
-set R="C:\Program Files\R\R-3.5.0\bin\R.exe"
+set R="C:\Program Files\R\R-3.6.1\bin\R.exe"
 
 REM stats
 %R% --vanilla < f_AOI.R > f_AOI.out
