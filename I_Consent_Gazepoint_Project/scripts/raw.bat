@@ -21,4 +21,4 @@ REM %PYTHON% tsv2raw.py --removeblinks --indir=%INDIR% --group=ctrl --outdir=%RA
 REM %PYTHON% tsv2raw.py --removeblinks --indir=%INDIR% --group=adhd --outdir=%RAWDIR% --width=%WIDTH% --height=%HEIGHT% --dist=%DIST%
 REM %PYTHON% tsv2raw.py --removeblinks --indir=%INDIR% --group=adhd_ctrl --outdir=%RAWDIR% --width=%WIDTH% --height=%HEIGHT% --dist=%DIST%
 REM %PYTHON% tsv2raw.py --removeblinks --indir=%INDIR% --group=aspd --outdir=%RAWDIR% --width=%WIDTH% --height=%HEIGHT% --dist=%DIST%
-%PYTHON% csv2raw.py --removeblinks --indir=%INDIR% --group=pilot --outdir=%RAWDIR% --width=%WIDTH% --height=%HEIGHT% --dist=%DIST%
+%PYTHON% csv2raw.py --indir=%INDIR% --outdir=%RAWDIR%

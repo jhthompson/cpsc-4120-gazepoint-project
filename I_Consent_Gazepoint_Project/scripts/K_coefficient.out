@@ -29,3 +29,33 @@ Type 'q()' to quit R.
 > # >> general preparations -------------------------------------------------------
 > source('customFunc.R')
 > load.libraries(c('afex','sciplot','knitr'))
+[1] "Loaded packages: "
+ [1] "knitr"     "sciplot"   "afex"      "lme4"      "Matrix"    "stats"    
+ [7] "graphics"  "grDevices" "utils"     "datasets"  "methods"   "base"     
+> 
+> pdf.options(family="NimbusSan",useDingbats=FALSE)
+> 
+> 
+> 
+> # 1) mean K coefficient (effect of ttype) ----------------------------------------------------------------
+> 
+> df <- read.csv("amfo.csv") # open data
+> head(df)
+[1] subj      group     block     trial     task      ftype     ttype    
+[8] timestamp K        
+<0 rows> (or 0-length row.names)
+> str(df)
+'data.frame':	0 obs. of  9 variables:
+ $ subj     : logi 
+ $ group    : logi 
+ $ block    : logi 
+ $ trial    : logi 
+ $ task     : logi 
+ $ ftype    : logi 
+ $ ttype    : logi 
+ $ timestamp: logi 
+ $ K        : logi 
+> # boxplot(df$K ~ df$subj)
+> # boxplot(df$K ~ df$ttype)
+> 
+> d1 <- aggregate(df[ ,9], by = list(df$subj, df$ttype, df$block, df$trial), FUN = mean)

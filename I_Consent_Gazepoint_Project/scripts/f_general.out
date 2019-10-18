@@ -38,3 +38,42 @@ Type 'q()' to quit R.
 > 
 > source('customFunc.R')
 > load.libraries(c('sciplot', 'afex', 'knitr', 'dplyr'))
+[1] "Loaded packages: "
+ [1] "dplyr"     "knitr"     "afex"      "lme4"      "Matrix"    "sciplot"  
+ [7] "stats"     "graphics"  "grDevices" "utils"     "datasets"  "methods"  
+[13] "base"     
+> 
+> pdf.options(family="NimbusSan", useDingbats=FALSE)
+> 
+> 
+> 
+> 
+> 
+> # 1) MICROSACCADES --------------------------------------------------------------------
+> # >> amplitude --------------------------------------------------------------------
+> 
+> ###
+> ###  MICROSACCADE AMPLITUDE - amp
+> ###
+> 
+> df <- read.csv("msac.csv")
+> df <- filter(df, dur < 0.04 & amp < 2)
+> head(df)
+ [1] subj      group     block     trial     task      ftype     ttype    
+ [8] amp       pvl       dur       timestamp
+<0 rows> (or 0-length row.names)
+> str(df)
+'data.frame':	0 obs. of  11 variables:
+ $ subj     : logi 
+ $ group    : logi 
+ $ block    : logi 
+ $ trial    : logi 
+ $ task     : logi 
+ $ ftype    : logi 
+ $ ttype    : logi 
+ $ amp      : logi 
+ $ pvl      : logi 
+ $ dur      : logi 
+ $ timestamp: logi 
+> 
+> d <- aggregate(df[ ,8], by = list(df$subj, df$ttype), FUN = mean)

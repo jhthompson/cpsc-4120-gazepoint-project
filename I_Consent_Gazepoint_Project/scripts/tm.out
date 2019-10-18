@@ -32,3 +32,65 @@ Type 'q()' to quit R.
 > source('customFunc.R') # load custom functions
 > source("lrheatmap.R") # load custom functions
 > source("TMSP.R") # load custom functions
+[1] "Loaded packages: "
+ [1] "lattice"      "car"          "carData"      "gmodels"      "entropy"     
+ [6] "colorspace"   "RColorBrewer" "ggplot2"      "stats"        "graphics"    
+[11] "grDevices"    "utils"        "datasets"     "methods"      "base"        
+> load.libraries(c('sciplot', 'afex', 'knitr'))
+[1] "Loaded packages: "
+ [1] "knitr"        "afex"         "lme4"         "Matrix"       "sciplot"     
+ [6] "lattice"      "car"          "carData"      "gmodels"      "entropy"     
+[11] "colorspace"   "RColorBrewer" "ggplot2"      "stats"        "graphics"    
+[16] "grDevices"    "utils"        "datasets"     "methods"      "base"        
+> 
+> pdf.options(family="NimbusSan", useDingbats=FALSE)
+> 
+> # Directory for transition matrices pictures
+> dir.create(file.path("./figs"), showWarnings = FALSE)
+> dir.create(file.path("./figs/TMS"), showWarnings = FALSE)
+> 
+> args <- commandArgs(trailingOnly = TRUE)
+> #print(args)
+> 
+> # naois <- as.integer(args[1])
+> naois <- 4
+> print(sprintf("naois = %d\n",naois))
+[1] "naois = 4\n"
+> 
+> df <- read.csv("fxtn-aois.csv") # open data
+> #str(df)
+> 
+> df$subj <- factor(df$subj)
+> df$ttype <- factor(df$ttype)
+> df$aoi_label <- factor(df$aoi_label)
+> 
+> 
+> 
+> 
+> # 1) calculations ------------------------------------------------------------
+> 
+> 
+> # select condition
+> ddf <- df
+> M <- zeroTM(naois)
+> M_0 <- TransMatrix(M,data=ddf,
++                     AOInamesVar="aoi_label",
++                     SubjectsVar="subj",
++                     FixOrderVar="order")
+[1] "Warnings: "
+[1] "No AOI transitions for subject: NA"
+[1] "Warnings: "
+character(0)
+> M_0 <- M
+> TransPlot2(transMatrix=M_0,
++            plotName="./figs/TMS/TM.pdf",
++            plotColors=brewer.pal(9,"Oranges"),
++            xLabels=c("leye","reye","nose","mouth"),
++            yLabels=c("leye","reye","nose","mouth"),
++            title="emotion categorization",
++            margin=c(6,6),
++            annCex=1.3,
++            cexR=1.4,
++            cexC=1.4,
++            cexAxis=1.6,
++            annColor='black')
