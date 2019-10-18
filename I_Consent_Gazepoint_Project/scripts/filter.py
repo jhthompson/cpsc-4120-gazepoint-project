@@ -256,8 +256,8 @@ def main(argv):
   # TUTORIAL NOTE: the aoidefinition file will change based on what the
   #                stimulus was, could be inverted, different background, etc.
   # process AOI file
-  aoidir = "../../stimulus/static/"
-  aoifile = aoidir + "aoidefinition-2eyes-1024x768.sla"
+  aoidir = "../src/scribus-AOIs/"
+  aoifile = aoidir + "consent_page1.sla"
   print "aoifile = ", aoifile
 
   aoidict = {}
