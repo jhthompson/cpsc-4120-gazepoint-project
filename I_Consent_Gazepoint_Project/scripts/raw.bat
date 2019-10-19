@@ -1,7 +1,7 @@
-set PYTHON=py -2
+set PYTHON=python
 
-set INDIR=../../exp/1680x1050/demo/
-set IMGDIR=../../stimulus/1680x1050/
+set INDIR=../result/
+set IMGDIR=../src/static/
 
 set PLTDIR=./plots/
 set OUTDIR=./data/

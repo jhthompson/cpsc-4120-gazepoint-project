@@ -289,12 +289,15 @@ def main(argv):
     elif imagebase == 'grid':
       imagebase = "composite-1680x1050"
       cond = 'grid'
+    imagebase = "page1-811x1050"
+
     print "Image: ", image, "[", imagebase, "]"
 
 
     # process AOI file
-    aoidir = "../../stimulus/1680x1050/"
+    aoidir = "../src/scribus-AOIs"
     aoifile = aoidir + imagebase + ".sla"
+    aoifile = "consent_page1.sla"
     print "aoifile = ", aoifile
 
     aoidict = {}
