@@ -45,8 +45,6 @@ class SG:
     # calculate filter-coefficients
     self.coeff = dot(A, wvec)
 
-#   print "Coefficients: ", self.coeff
-
   def smooth(self,signal):
     
     """ applies coefficients calculated to signal """

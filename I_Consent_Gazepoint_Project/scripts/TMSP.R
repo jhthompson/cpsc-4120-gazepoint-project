@@ -15,16 +15,14 @@
 ###################################################################################
 
 ### Required packages
-load.libraries(c('ggplot2', 'RColorBrewer', 'colorspace', 'entropy', 'gmodels', 'car', 'lattice'))
-
-# library(ggplot2)
-# library(RColorBrewer)
-# library(colorspace)
-# library(entropy)
-# library(gmodels)
-# library(car)
-# library(lattice)
-# #library(MiscPsycho)
+library(gplots)
+library(RColorBrewer)
+library(colorspace)
+library(entropy)
+library(gmodels)
+library(car)
+library(lattice)
+#library(MiscPsycho)
 
 mixedletters <- function(n) {
   if(n <= 26) {
@@ -38,26 +36,35 @@ mixedletters <- function(n) {
 
 # setting up m x n AOI matrix: there are a total of m x n AOIs, but
 # transition matrix must be (m x n) x (m x n)
-zeroTM <- function(naois) {
-# digits <- c('0','1','2','3','4','5','6','7','8','9')
-  digits <- c('1','2','3','4','5','6','7','8','9')
-  la <- paste(digits[1:naois])
-# print(la)
+zeroTM <- function(xtiles,ytiles) {
+  # list of letters 'a', 'b', ..., <whaterver the last one is>
+# lx <- paste(letters[1:xtiles])
+# ly <- paste(letters[1:ytiles])
+  lx <- mixedletters(xtiles)
+  ly <- mixedletters(ytiles)
+# print(lx)
+# print(ly)
 
-  # set up m x n list of AOI labels
+  # set up m x n list of AOI labels: 'aa', 'ab', 'ac', ...
   AOIs <- list()
-  for (i in 1:length(la)) {
-    AOIs[length(AOIs) + 1L] <- paste(la[i],sep="")
+  for (i in 1:length(lx)) {
+    for (j in 1:length(ly)) {
+      AOIs[length(AOIs) + 1L] <- paste(lx[i],ly[j],sep="")
+    }
   }
-  rows = length(la)
-  cols = length(la)
-# print(sprintf("AOIs:\n"))
+# for (i in 1:length(ly)) {
+#   for (j in 1:length(lx)) {
+#     AOIs[length(AOIs) + 1L] <- paste(ly[i],lx[j],sep="")
+#   }
+# }
+  rows = length(lx)*length(ly)
+  cols = length(lx)*length(ly)
+  print(sprintf("AOIs:\n"))
 # print(AOIs)
-# print(sprintf("zeroTM: nrow x ncol: %d x %d",rows,cols))
+  print(sprintf("zeroTM: nrow x ncol: %d x %d",rows,cols))
   M <- matrix(data=0,
               nrow=rows,
               ncol=cols,
-              byrow=TRUE,
               dimnames=list(AOIs, AOIs)) # empty matrix
 # print(M)
   return(M)
@@ -92,7 +99,7 @@ TransMatrix <- function(M, data, AOInamesVar, SubjectsVar, FixOrderVar, print=FA
   # empty matrix
 # M <- matrix(data=0, nrow=siz, ncol=siz, dimnames=list(uniqAOI, uniqAOI))
   M[,] <- 0
-  for (i in 1:lui) {
+  for (i in 1:lui){
     kukudf <- data[which(data[ ,SubjectsVar] == uniqS[i]), ] # choose subject i
     luj <- dim(kukudf)[1] # how many AOIs for subject i
     if (luj > 1){
@@ -101,9 +108,9 @@ TransMatrix <- function(M, data, AOInamesVar, SubjectsVar, FixOrderVar, print=FA
         j <- j+1
         from <- kukudf[j, AOInamesVar]
         to <- kukudf[j+1, AOInamesVar]
-#       print(sprintf("nrow: %d, ncol: %d",nrow(M),ncol(M)))
-#       print(sprintf("from: %d, to: %d",from,to))
-#       print(sprintf("from: %s, to: %s",as.character(from),as.character(to)))
+        print(sprintf("nrow: %d, ncol: %d",nrow(M),ncol(M)))
+        print(sprintf("from: %d, to: %d",from,to))
+        print(sprintf("from: %s, to: %s",as.character(from),as.character(to)))
         M[as.character(from), as.character(to)] <-
         M[as.character(from), as.character(to)] + 1 
         if (j > luj-2) break()
@@ -177,14 +184,10 @@ TransPlot2 <- function(transMatrix,
                        plotColors=brewer.pal(9,"Oranges"),
                        margin=c(4,4),
                        annColor='black',
-                       annCex=1.0,
+                       annCex=0.5,
                        annAlpha=0.85,
-                       xLabels=NULL,
-                       yLabels=NULL,
-                       title=NULL,
-                       cexR=1.2,
-                       cexC=1.2,
-                       cexT=1.5,
+                       cexR=0.7,
+                       cexC=0.7,
                        cexAxis=1.5) {
   pdf.options(family = "NimbusSan",useDingbats=FALSE)
   pdf(plotName)
@@ -192,13 +195,9 @@ TransPlot2 <- function(transMatrix,
          ColorRamp=plotColors,
          cellColor=annColor,
          margin=margin,
-         cex.main=cexT,
          cex.cels=annCex,
          cex.rows=cexR,
          cex.cols=cexC,
-         xLabels=xLabels,
-         yLabels=yLabels,
-         title=title,
          xlab='Destination AOI (to)',
          ylab='Source AOI (from)',
          cex.lab=cexAxis
@@ -209,9 +208,7 @@ TransPlot2 <- function(transMatrix,
                c("/sw/share/texmf-dist/fonts/type1/urw/helvetic",
                  "/usr/share/texmf/fonts/type1/urw/helvetic",
                  "/usr/local/teTeX/share/texmf-dist/fonts/type1/urw/helvetic",
-				 "/Program Files/MiKTeX 2.9/fonts",
                  "/usr/share/texmf-texlive/fonts/type1/urw/helvetic",
-                 "/opt/local/share/texmf-texlive/fonts/type1/urw/helvetic",
                  "/usr/local/texlive/texmf-local/fonts/type1/urw/helvetic"))
 }
 ############################################################################
@@ -272,7 +269,6 @@ TransPlot <- function (transMatrix,
                  "/usr/share/texmf/fonts/type1/urw/helvetic",
                  "/usr/local/teTeX/share/texmf-dist/fonts/type1/urw/helvetic",
                  "/usr/share/texmf-texlive/fonts/type1/urw/helvetic",
-                 "/opt/local/share/texmf-texlive/fonts/type1/urw/helvetic",
                  "/usr/local/texlive/texmf-local/fonts/type1/urw/helvetic"))
 
 }
@@ -293,7 +289,7 @@ TransPlot <- function (transMatrix,
 #     TransEntropy(data=df, AOInamesVar="AOI", SubjectsVar="Subject", FixOrderVar="")    
 ############################################################################
 
-TransEntropy <- function(M, data, SubjectsVar, AOInamesVar, FixOrderVar, print=FALSE) {
+TransEntropy <- function(M, data, SubjectsVar, AOInamesVar, FixOrderVar) {
   data <- data[order(data[ ,SubjectsVar], data[ ,FixOrderVar]), ]
   uniqS <- sort(unique(data[ ,SubjectsVar]))
   lu <- length(uniqS)
@@ -312,18 +308,6 @@ TransEntropy <- function(M, data, SubjectsVar, AOInamesVar, FixOrderVar, print=F
     M[,] <- 0
     kukudf <- data[which(data[ ,SubjectsVar] == uniqS[i]), ] # choose subject i
     luj <- dim(kukudf)[1] # how many AOIs for subject i
-    if (print == TRUE) {
-      print('***************************')
-      print('Unique Subject' )
-      print('')
-      print(uniqS[i])
-      print('data' )
-      print('')
-      print(kukudf)
-      print('aois' )
-      print('')
-      print(luj)
-    }
     if (luj > 1) {
       j <- 0
       repeat {
@@ -390,32 +374,9 @@ TransEntropy <- function(M, data, SubjectsVar, AOInamesVar, FixOrderVar, print=F
     # rows does
     # H_t does normalization internally
     en <- H_t(M)
-    if (print == TRUE) {
-      if(is.na(en)) {
-        print('***************************')
-        print(' entropy is na            ' )
-        print('***************************')
-      }
-    }
 #   could get NA here...
     if(is.na(en)) {
       en = 0.0
-    }
-    ####### Print results
-    if (print == TRUE) {
-      print('***************************')
-      print('Raw data Transition Matrix' )
-      print('')
-      print(Munst)
-      print('***************************')
-      print('Normalized Transition Matrix' )
-      print('')
-      print(M)
-      print('Results written to M and Munst matrices. Use print(M) and print(Munst)')
-      print('***************************')
-      print('Transition Entropy' )
-      print('')
-      print(en)
     }
     TMentrop <- c(TMentrop, en)
   }
@@ -465,10 +426,10 @@ H_t <- function(M) {
 ############################################################################
 H_s <- function(M) {
   # matrix whose columns contain the eigenvectors
-  e <- eigen(M)
-  # or is it transpose of M?  No, that would give us the left eigenvectors
+# e <- eigen(M)
+  # or is it transpose of M?
   # see: http://faculty.cas.usf.edu/jkwilde/mathcamp/Linear_Algebra_II.pdf
-# e <- eigen(t(M))
+  e <- eigen(t(M))
   # stationary distribution \pi is unchanged by the operation of transition
   # matrix \mathbf{P} on it, and so is defined by
   # \( \pi \mathbf{P} = \pi \)

@@ -1,1 +1,1 @@
-subj,group,block,trial,task,ftype,ttype,timestamp,x,y,duration,prev_sacc_amplitude,aoi_label,order
+subj,stimulus,timestamp,x,y,duration,prev_sacc_amplitude,aoi_label

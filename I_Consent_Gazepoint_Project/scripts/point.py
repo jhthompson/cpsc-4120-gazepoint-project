@@ -18,11 +18,6 @@ class Point:
   def at(self, k):
     return self.coord[k]
 
-  # set coords
-  def set(self, x, y):
-    self.coord[0] = x
-    self.coord[1] = y
-
   def getStatus(self):
     return self.error
 	

@@ -6,7 +6,6 @@ lrheatmap <- function(x,
                       cex.rows=1.0,	# size adjustment for row labels
                       cex.cols=1.0,	# size adjustment for col labels
                       cex.cels=1.0,	# size adjustment for cell numerals
-                      cex.main=1.0,
                       cellColor='black',
                       cellAlpha=0.85,
                       margin=c(8,8),	# left, bottom margins
@@ -79,8 +78,7 @@ lrheatmap <- function(x,
   # graphics output
 
   # margins (bottom, left, top, right)
-# margins=c(margin[1],margin[2],2,2)
-  margins=c(margin[1],margin[2],4,2)
+  margins=c(margin[1],margin[2],2,2)
   par(mar=margins)
 
   # cell numbers (as text)
@@ -112,12 +110,12 @@ lrheatmap <- function(x,
   }
 
   if( !is.null(title) ) {
-    title(main=title,cex.main=cex.main,line=1.8)
+    title(main=title)
   }
 
   # row labels; las: 0: parallel, 1: horiz., 2: perp., 3: vertical
   axis(LEFT <-2, at=1:length(yLabels), labels=yLabels, cex.axis=cex.rows,
-       las = HORIZONTAL<-2, tick=0, line=-0.5)
+       las = HORIZONTAL<-1, tick=0, line=-0.5)
   # col labels
   axis(BELOW<-1, at=1:length(xLabels), labels=xLabels, cex.axis=cex.cols,
        las = VERTICAL<-3, tick=0, line=-0.5)

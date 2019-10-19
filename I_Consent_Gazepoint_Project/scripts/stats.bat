@@ -1,8 +1,11 @@
 set R="C:\Program Files\R\R-3.6.1\bin\R.exe"
 
-REM stats
-%R% --vanilla < f_AOI.R > f_AOI.out
-%R% --vanilla < f_general.R > f_general.out
-%R% --vanilla --args 4 < tm.R > tm.out
-%R% --vanilla < K_coefficient.R > K_coefficient.out
+::set XTILES=16
+::set YTILES=12
+set XTILES=4
+set YTILES=2
 
+REM stats
+%R% --vanilla --args %XTILES% %YTILES% < tm.R > tm.out
+%R% --vanilla < fxtn-aois.R > fxtn-aois.out
+%R% --vanilla < anns.R > anns.out

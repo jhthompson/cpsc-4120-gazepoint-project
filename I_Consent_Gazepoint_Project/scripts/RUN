@@ -1,3 +1,0 @@
-Some example commands to generate graphs from single file:
-
-python2 ./graph.py --smooth=False --indir=./data/raw/ --imgdir=../../stimulus/static/screenshots/ --dist=23.62 --screen=19 --width=1024 --height=768 --hertz=500 --xtiles=8 --ytiles=3 --baselineT=2.0 --endT=180.0 --outdir=./data/ --pltdir=./plots/ --image="grey-1280x1024.png" --file=SOR_stud09-pilot-2-36-emotion-F07-happy.raw
