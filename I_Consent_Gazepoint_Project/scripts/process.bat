@@ -1,13 +1,13 @@
-set PYTHON=py -2
+set PYTHON=python
 ::set WIDTH=1600
 ::set HEIGHT=900
 set WIDTH=1680
 set HEIGHT=1050
 ::set WIDTH=2048
 ::set HEIGHT=1536
-set HERTZ=150
-set DIST=25.59
-set SCREEN=13
+set HERTZ=60
+set DIST=22.44
+set SCREEN=22
 ::set XTILES=16
 ::set YTILES=12
 set XTILES=4

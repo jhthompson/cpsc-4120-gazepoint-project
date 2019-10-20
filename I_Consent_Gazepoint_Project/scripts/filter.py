@@ -131,12 +131,12 @@ def main(argv):
   # Enable/disable butterworth smoothing.
   smooth = False
   # screen height in pixels
-  width = 1600
-  height = 900
+  width = 1680
+  height = 1050
   # screen diagonal (in inches)
-  screen = 17
+  screen = 22
   # viewing distance (in inches)
-  dist = 23.62
+  dist = 22.44
   # sampling rate
   herz = 60.0
   # smoothing (Butterworth) filter parameters: degree, cutoff

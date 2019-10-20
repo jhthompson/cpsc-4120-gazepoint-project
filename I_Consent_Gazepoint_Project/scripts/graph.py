@@ -266,7 +266,7 @@ def main(argv):
   lagrange = Lagrange(int(width),int(height))
 
   for file in files:
-    print(files)
+    # print(files)
     scanpath = Scanpath()
     scanpath.parseFile(file,width,height,herz)
 
@@ -352,6 +352,13 @@ def main(argv):
                             subj,cond,width,height,xtiles,ytiles)
 
     scanpath.dumpDAT("%s/%s%s" % (outdir,filename,".dat"),width,height)
+
+    scanpath.dumpFixatedAOIs("%s/%s-fxtn-aoi%s" % (outdir,filename,".csv"),\
+                        width,height,\
+                        aoilist)
+
+    scanpath.ann("%s/%s-ann%s" % (outdir,filename,".csv"),\
+                        subj,cond, imagebase,width,height)
 #   scanpath.dumpXML("%s/%s%s" % (outdir,filename,".xml"),width,height)
 
 #   plotter.renderPoints1D("%s/%s-%s" % (pltdir,filename,"gzpt"),\
