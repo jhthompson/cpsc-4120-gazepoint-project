@@ -77,6 +77,7 @@ print >> df,"subj,stimulus,timestamp,x,y,duration,prev_sacc_amplitude,aoi_label"
 
 dir = './data/'
 
+# TODO: this list is empty for some reason
 # find all files in dir with .csv extension
 lst = filter(lambda a: a.endswith('-fxtn-aoi.csv'),os.listdir(dir))
 

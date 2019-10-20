@@ -1,4 +1,4 @@
-set PYTHON=py -2
+set PYTHON=python
 
 REM collate
 %PYTHON% -W ignore collate-fxtn-aois.py
