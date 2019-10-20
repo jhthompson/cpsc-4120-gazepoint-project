@@ -1,116 +1,187 @@
-###
-#####   R SCRIPT for Analysis of
-###   
-#####   - TMs
-#####   - transition entropy
-###
+library(sciplot)
+library(ez)
+library(psych)
+library(reshape)
+library(ggplot2)
 
-
-# TM and transition entropy ------------------------------------------------------------
-
-# >> general preparations -------------------------------------------------------
-# setwd("~/Documents/Projekty/faces/src/tutorial_etra18")
-source('customFunc.R') # load custom functions
 source("lrheatmap.R") # load custom functions
 source("TMSP.R") # load custom functions
-load.libraries(c('sciplot', 'afex', 'knitr'))
-
-pdf.options(family="NimbusSan", useDingbats=FALSE)
-
-# Directory for transition matrices pictures
-dir.create(file.path("./figs"), showWarnings = FALSE)
-dir.create(file.path("./figs/TMS"), showWarnings = FALSE)
 
 args <- commandArgs(trailingOnly = TRUE)
 #print(args)
 
-# naois <- as.integer(args[1])
-naois <- 4
-print(sprintf("naois = %d\n",naois))
+xtiles <- as.integer(args[1])
+ytiles <- as.integer(args[2])
+print(sprintf("xtiles = %d, ytiles = %d\n",xtiles,ytiles))
 
-df <- read.csv("fxtn-aois.csv") # open data
-#str(df)
+M <- zeroTM(xtiles,ytiles)
 
-df$subj <- factor(df$subj)
-df$ttype <- factor(df$ttype)
-df$aoi_label <- factor(df$aoi_label)
+df <- read.csv("aois.csv") # open data
 
-
-
-
-# 1) calculations ------------------------------------------------------------
-
-
-# select condition
-ddf <- df
-M <- zeroTM(naois)
-M_0 <- TransMatrix(M,data=ddf,
-                    AOInamesVar="aoi_label",
+ddf <- df[which(df$cond == "p1"), ] # select condition
+ddf
+M_p1 <- TransMatrix(M,data=ddf,
+                    AOInamesVar="AOI",
                     SubjectsVar="subj",
                     FixOrderVar="order")
-M_0 <- M
-TransPlot2(transMatrix=M_0,
-           plotName="./figs/TMS/TM.pdf",
+M_p1 <- M
+en_p1 <- TransEntropy(M,data=ddf,
+                    AOInamesVar="AOI",
+                    SubjectsVar="subj",
+                    FixOrderVar="order")
+en_p1 <- TMentrop
+sen_p1 <- StationaryEntropy(M,data=ddf,
+                    AOInamesVar="AOI",
+                    SubjectsVar="subj",
+                    FixOrderVar="order")
+sen_p1 <- STentrop
+TransPlot2(transMatrix=M_p1,
+           plotName="TM_p1.pdf",
            plotColors=brewer.pal(9,"Oranges"),
-           xLabels=c("leye","reye","nose","mouth"),
-           yLabels=c("leye","reye","nose","mouth"),
-           title="emotion categorization",
-           margin=c(6,6),
-           annCex=1.3,
-           cexR=1.4,
-           cexC=1.4,
-           cexAxis=1.6,
            annColor='black')
+#          plotColors=brewer.pal(4,"Greys"),
+#          annColor='#252525')
 
-dd <- data.frame()
-for(i in unique(ddf$ttype)){
-  # need to zero out TM every time
-  M <- zeroTM(naois)
-  d <- ddf[ddf$ttype == i, ]
+M <- zeroTM(xtiles,ytiles)
 
-  TransMatrix(M, data=d, AOInamesVar="aoi_label", SubjectsVar="subj", FixOrderVar="order")
-  
-  TransEntropy(M, data=d, AOInamesVar="aoi_label", SubjectsVar="subj", FixOrderVar="order",print=FALSE)
+ddf <- df[which(df$cond == "p2"), ] # select condition
+M_p2 <- TransMatrix(M,data=ddf,
+                    AOInamesVar="AOI",
+                    SubjectsVar="subj",
+                    FixOrderVar="order")
+M_p2 <- M
+en_p2 <- TransEntropy(M,data=ddf,
+                    AOInamesVar="AOI",
+                    SubjectsVar="subj",
+                    FixOrderVar="order")
+en_p2 <- TMentrop
+sen_p2 <- StationaryEntropy(M,data=ddf,
+                    AOInamesVar="AOI",
+                    SubjectsVar="subj",
+                    FixOrderVar="order")
+sen_p2 <- STentrop
+TransPlot2(transMatrix=M_p2,
+           plotName="TM_p2.pdf",
+           plotColors=brewer.pal(9,"Oranges"),
+           annColor='black')
+#          plotColors=brewer.pal(4,"Greys"),
+#          annColor='#252525')
 
-  TransPlot2(transMatrix=M,
-             plotName=paste("./figs/TMS/TM_", i, ".pdf", sep = ""),
-             plotColors=brewer.pal(9,"Oranges"),
-             xLabels=c("leye","reye","nose","mouth"),
-             yLabels=c("leye","reye","nose","mouth"),
-             title=paste("emotion categorization, ttype: ",i, sep = ""),
-             margin=c(6,6),
-             annCex=1.3,
-             cexR=1.4,
-             cexC=1.4,
-             cexAxis=1.6,
-             annColor='black')
-  dku <- TMentrop
-  dku$ttype <- rep(i, length(dku$Entropy))
-  dd <- rbind(dku, dd)
-} 
-dd$ttype <- factor(dd$ttype)
-str(dd)
+# this should be normalized stationary entropy
+#M_p1
+SE_p1 <- H_s(M_p1)
+SE_p1$eta
+SE_p1$sdist
+#M_p2
+SE_p2 <- H_s(M_p2)
+SE_p2$eta
+SE_p2$sdist
 
+# Note: entropy is computed as the empirical entropy, estimated via maximum
+#	likelihood, bias-corrected by applying the Miller-Madow correction
+#	to the empirical entropy
+#en_p1
+#en_p2
+con_p1 <- c(rep("p1",length(en_p1$Subject)))
+con_p2 <- c(rep("p2",length(en_p2$Subject)))
 
-# 2) plots and stats ------------------------------------------------------------------------
+# construct new data frame
+Entropy <- c(en_p1$Entropy, en_p2$Entropy)
+Subject <- c(en_p1$Subject, en_p2$Subject)
+Task <- c(con_p1, con_p2)
+d <- data.frame(Entropy, Subject, Task)
+d
 
-# # boxplot
-# pdf("./figs/boxplots_entropy.pdf", height=7,width=20)
-# boxplot(dd$Entropy ~  dd$Subject, ylim=c(0,1), main="Transition Entropy")
-# dev.off()
+# calculate anova
+#ezANOVA(data=d, dv=Entropy, wid=Subject, within=Task, type=3)
+d$Subject <- factor(d$Subject)
+d$Task <- factor(d$Task)
+attach(d)
+#H.aov <- aov(Entropy ~ (Subject * Task) + Error(Subject / Task), d)
+#H.aov <- aov(Entropy ~ (Subject * Task) + Error(Subject), d)
+H.aov <- aov(Entropy ~ Task + Error(Subject), d)
+summary(H.aov)
+detach(d)
 
-# plot
-pdf("./figs/transition_entropy.pdf", height=7,width=9, points=14)
-par(mar=c(5,5,4,1))
-bargraph.CI(ttype, Entropy, data=dd, ylim=c(0,1), legend=T, main="Transition entropy", xlab="emotion category", cex.lab=1.5, cex.leg=1.3, cex.main=1.5, cex.names=1.1)
+t.test(d$Entropy ~ d$Task)
+pairwise.t.test(d$Entropy, d$Task, p.adj="bonferroni")
+describeBy(d$Entropy, group=d$Task)
+ddf_p1 = d$Entropy[which(d$Task == "p1")]
+ddf_p2 = d$Entropy[which(d$Task == "p2")]
+power.t.test(power=.95,sig.level=.05,sd=max(sd(ddf_p1),sd(ddf_p2)),delta=abs(mean(ddf_p1)-mean(ddf_p2)))
+
+pdf("./entropy.pdf",family="NimbusSan",useDingbats=FALSE)
+bargraph.CI(Task, Entropy, group = NULL, data = d,
+            split = FALSE,
+            col = c("#f0f0f0","#bdbdbd","#636363"),
+            angle = c(45,45,45),
+            density = c(60,60,60),
+            lc = TRUE,
+            uc = TRUE,
+            legend = FALSE,
+            ncol = 1,
+            leg.lab = NULL,
+            x.leg = 6.2,
+            y.leg = 2.4,
+            cex.leg = 1.2,
+#           ylim = c(0,0.5),
+            ylim = c(0,1.0),
+            xlab = "Task Type",
+            ylab = "Mean Normalized Transition Entropy (bits/transition with SE)",
+            cex.lab = 1.3,
+#           names.arg = c("0", "1"),
+            names.arg = c("VE-NW", "VE-W"),
+            cex.names = 1.3,
+            main = "Normalized Transition Entropy vs. Task Type"
+)
 dev.off()
+embedFonts("./entropy.pdf", "pdfwrite", outfile = "./entropy.pdf",
+  fontpaths =
+  c("/sw/share/texmf-dist/fonts/type1/urw/helvetic",
+    "/usr/share/texmf/fonts/type1/urw/helvetic",
+    "/usr/local/teTeX/share/texmf-dist/fonts/type1/urw/helvetic",
+    "/usr/share/texmf-texlive/fonts/type1/urw/helvetic",
+    "/usr/local/texlive/texmf-local/fonts/type1/urw/helvetic"))
 
+# construct new data frame
+SEntropy <- c(sen_p1$SEntropy, sen_p2$SEntropy)
+Subject <- c(sen_p1$Subject, sen_p2$Subject)
+Task <- c(con_p1, con_p2)
+d2 <- data.frame(SEntropy, Subject, Task)
+d2
 
-#####.
-#####. ANOVA - Effect of ttype (emotion) on tranisiton entropy
-#####.
-a <- aov_ez(data = dd, id = 'Subject', dv = 'Entropy', within = 'ttype')
-kable(nice(a))
+t.test(d2$SEntropy ~ d2$Task)
+describeBy(d2$SEntropy, group=d2$Task)
 
-# => effect of ttype non-sign.
-
+pdf("./sentropy.pdf",family="NimbusSan",useDingbats=FALSE)
+bargraph.CI(Task, SEntropy, group = NULL, data = d2,
+            split = FALSE,
+            col = c("#f0f0f0","#bdbdbd","#636363"),
+            angle = c(45,45,45),
+            density = c(60,60,60),
+            lc = TRUE,
+            uc = TRUE,
+            legend = FALSE,
+            ncol = 1,
+            leg.lab = NULL,
+            x.leg = 6.2,
+            y.leg = 2.4,
+            cex.leg = 1.2,
+#           ylim = c(0,0.5),
+            ylim = c(0,1.0),
+            xlab = "Task Type",
+            ylab = "Mean Normalized Stationay Entropy (bits/transition with SE)",
+            cex.lab = 1.3,
+#           names.arg = c("0", "1"),
+            names.arg = c("VE-NW", "VE-W"),
+            cex.names = 1.3,
+            main = "Normalized Stationary Entropy vs. Task Type"
+)
+dev.off()
+embedFonts("./sentropy.pdf", "pdfwrite", outfile = "./sentropy.pdf",
+  fontpaths =
+  c("/sw/share/texmf-dist/fonts/type1/urw/helvetic",
+    "/usr/share/texmf/fonts/type1/urw/helvetic",
+    "/usr/local/teTeX/share/texmf-dist/fonts/type1/urw/helvetic",
+    "/usr/share/texmf-texlive/fonts/type1/urw/helvetic",
+    "/usr/local/texlive/texmf-local/fonts/type1/urw/helvetic"))

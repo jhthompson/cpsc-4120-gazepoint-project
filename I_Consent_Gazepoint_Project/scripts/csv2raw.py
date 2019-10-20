@@ -29,7 +29,7 @@ def csv2raw(infile,outdir):
   filename, ext = os.path.splitext(base)
   print 'Processing: ' + filename
 
-  outfile = open(outdir + filename + '.raw','w+')
+  outfile = None
 
   # read lines, throwing away first one (header)
   linelist = f.read().splitlines()
@@ -43,16 +43,39 @@ def csv2raw(infile,outdir):
       BPOGX = idx
     if label.strip() == "BPOGY":
       BPOGY = idx
+    if label.strip() == "MEDIA_NAME":
+      MEDIA_NAME = idx
 
   # reset coords
+  subj = "User x"
   x = ''
   y = ''
   t = ''
+  stimulus = "Blank"
 
   # process each line, splitting on ','
   for line in linelist:
     elements = line.split(',')
     entry = np.asarray(elements)
+
+    if entry[MEDIA_NAME] != stimulus:
+      stimulus = entry[MEDIA_NAME]
+
+      # parse the subject name from the file name
+      subj = filename[:filename.find('_')]
+
+      # new stimulus, open new file
+      print 'Processing: ' + subj + ' (' + stimulus + ')'
+
+      if outfile is not None:
+        outfile.close()
+
+      outfile = open(outdir + subj + '_' + stimulus + '.raw','w+')
+
+      # reset coords
+      x = ''
+      y = ''
+      t = ''
 
     # dump out gaze coordinates
     if(outfile is not None and

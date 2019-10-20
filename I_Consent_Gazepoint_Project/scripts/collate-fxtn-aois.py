@@ -13,17 +13,15 @@ def catCSVFile(infile,df,ct):
 
   print "Processing: ", infile, "[", base, "]"
 
-  # TUTORIAL NOTE: edit this to properly parse the .dat files
   # extract stimulus name and subj id
-  subj = base.split('-')[0]
-  group = base.split('-')[1]
-  block = base.split('-')[2]
-  trial = base.split('-')[3]
-  task = base.split('-')[4]
-  ftype = base.split('-')[5]
-  ttype = base.split('-')[6]
-  print "subj, group, block, trial, ftype, ttype: ", \
-         subj, group, block, trial, ftype, ttype
+  stimulus = base.split('_')[1].split('-')[0]
+  subj = base.split('_')[0]
+  if stimulus == 'p1' or stimulus == 'p3':
+    stimulus = "puntos1016x1536"
+  elif stimulus == 'p2':
+    stimulus = "painting1016x1536"
+  print "stim = ", stimulus
+  print "subj = ", subj
 
   # read lines, throwing away first one (header)
 # linelist = f.readlines()
@@ -57,33 +55,15 @@ def catCSVFile(infile,df,ct):
     duration  = entry[DURATION]
     prev_sacc_amplitude  = entry[PREV_SACC_AMPLITUDE]
     aoi_label  = entry[AOI_LABEL]
-    if aoi_label == "leye":
-      aoi_numb = '1'
-    elif aoi_label == "reye":
-      aoi_numb = '2'
-    elif aoi_label == "nose":
-      aoi_numb = '3'
-    elif aoi_label == "mouth":
-      aoi_numb = '4'
-    else:
-      aoi_numb = '0'
-      print "************ ERROR: ", infile, " has strange AOI label"
 
-    # TUTORIAL NOTE: edit this to properly output the .csv files
-    str = "%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s" % ( \
-                         subj, \
-                         group, \
-                         block, \
-                         trial, \
-                         task, \
-                         ftype, \
-                         ttype, \
-                         timestamp,\
-                         x,y,\
-                         duration,\
-                         prev_sacc_amplitude,\
-                         aoi_numb,\
-                         ct)
+    str = "%s,%s,%s,%s,%s,%s,%s,%s" % ( \
+                                    subj, \
+                                    stimulus,\
+                                    timestamp,\
+                                    x,y,\
+                                    duration,\
+                                    prev_sacc_amplitude,\
+                                    aoi_label)
     print >> df,str
     ct += 1
 
@@ -91,13 +71,13 @@ def catCSVFile(infile,df,ct):
 
 ###############################################################################
 
-# TUTORIAL NOTE: edit this to properly output the .csv file header
 # clear out output file
 df = open("fxtn-aois.csv",'w')
-print >> df,"subj,group,block,trial,task,ftype,ttype,timestamp,x,y,duration,prev_sacc_amplitude,aoi_label,order"
+print >> df,"subj,stimulus,timestamp,x,y,duration,prev_sacc_amplitude,aoi_label"
 
 dir = './data/'
 
+# TODO: this list is empty for some reason
 # find all files in dir with .csv extension
 lst = filter(lambda a: a.endswith('-fxtn-aoi.csv'),os.listdir(dir))
 

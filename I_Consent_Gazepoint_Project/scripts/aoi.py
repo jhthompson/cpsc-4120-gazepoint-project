@@ -13,7 +13,6 @@ class AOI:
 #   self.xy = (x,y-h)
     self.width = w
     self.height = h
-    self.label = None
 
     self.vertices = []
 
@@ -26,11 +25,48 @@ class AOI:
 #   self.vertices.append((x+w,y))
 #   self.vertices.append((x,y))
 
-  def setAOILabel(self,label):
-    self.label = label
+    self.aoi_label = None
+    self.aoi_line = None
+    self.aoi_order = None
+    self.word = None
+    self.word_type = None
+    self.word_length_signs = None
+
+  def setWordLengthSigns(self,word_length_signs):
+    self.word_length_signs = word_length_signs
+
+  def setWordType(self,word_type):
+    self.word_type = word_type
+
+  def setWord(self,word):
+    self.word = word
+
+  def setAOIOrder(self,aoi_order):
+    self.aoi_order = aoi_order
+
+  def setAOILine(self,aoi_line):
+    self.aoi_line = aoi_line
+
+  def setAOILabel(self,aoi_label):
+    self.aoi_label = aoi_label
+
+  def getWordLengthSigns(self):
+    return self.word_length_signs
+
+  def getWordType(self):
+    return self.word_type
+
+  def getWord(self):
+    return self.word
+
+  def getAOILine(self):
+    return self.aoi_line
 
   def getAOILabel(self):
-    return self.label
+    return self.aoi_label
+
+  def getAOIOrder(self):
+    return self.aoi_order
 
   def getXY(self,h=None):
     if h is not None:
@@ -47,7 +83,7 @@ class AOI:
   def dump(self):
 #   for i in range(len(self.vertices)):
 #     print self.vertices[i]
-    print self.label, ": (x,y), (w,h) = ", self.xy, ",", self.width, ",", self.height
+    print "(x,y), (w,h) = ", self.xy, ",", self.width, ",", self.height
 		
   def inside(self,x,y):
 

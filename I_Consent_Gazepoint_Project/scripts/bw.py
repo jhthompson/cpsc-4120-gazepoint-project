@@ -55,14 +55,6 @@ class Butterworth:
 
     return x
 
-  def dump(self):
-    print "A: ", self.A
-    print "d1: ", self.d1
-    print "d2: ", self.d2
-    print "w0: ", self.w0
-    print "w1: ", self.w1
-    print "w2: ", self.w2
-
 def applyBWFilter(gazepoints,degree,herz,cutoff):
 
   bwx = Butterworth(degree,herz,cutoff)

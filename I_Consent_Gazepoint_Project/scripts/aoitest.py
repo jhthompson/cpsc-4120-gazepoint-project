@@ -3,9 +3,6 @@
 # system includes
 import sys
 import os
-#import xml.etree.ElementTree as ET
-from xml.etree import ElementTree as ET
-from xml.etree.ElementTree import tostring
 import numpy as np
 
 # local includes
@@ -13,7 +10,7 @@ from aoi import AOI
 
 def main(argv):
 
-  indir = "../../stimulus/static/"
+  indir = "../../exp/jaconde/"
 
   aoi = AOI(179,764.0,211,108)
 
@@ -23,82 +20,76 @@ def main(argv):
   print "in" if aoi.inside(0.0,0.0) else "out"
 
   # process AOI file
-  aoidir = "../../stimulus/static/"
-  aoifile = aoidir + "aoidefinition.sla"
+  aoidir = "../../exp/jaconde/"
+  aoifile = aoidir + "aoi_definition.csv"
   print "aoifile = ", aoifile
 
   aoidict = {}
-  aoilist = []
 
   if(os.path.isfile(aoifile)):
+    f = open(aoifile,'r')
+    linelist = f.read().splitlines()
+    header = linelist[0].split(',')
+    linelist = linelist[1:]
 
-    print "parsing: ", aoifile
+    for idx, label in enumerate(header):
+      if label.strip() == "task_id":
+        TASK_ID = idx
+      if label.strip() == "aoi_label":
+        AOI_LABEL = idx
+      if label.strip() == "x_bl":
+        X_BL = idx
+      if label.strip() == "y_bl":
+        Y_BL = idx
+      if label.strip() == "x_br":
+        X_BR = idx
+      if label.strip() == "y_br":
+        Y_BR = idx
+      if label.strip() == "x_tr":
+        X_TR = idx
+      if label.strip() == "y_tr":
+        Y_TR = idx
+      if label.strip() == "x_tl":
+        X_TL = idx
+      if label.strip() == "y_tl":
+        Y_TL = idx
 
-    tree = ET.parse(aoifile)
-    #print "tree = %s" % tree
+    for line in linelist:
+      entry = line.split(',')
+      stimulus = entry[TASK_ID].replace('\'','')
+      type = entry[AOI_LABEL]
+#     print stimulus,",",type
 
-    # should be something like Experiment, {}
-    root = tree.getroot()
-  # print "root.tag = %s, root.attrib = %s" % (root.tag, root.attrib)
+      x_bl = float(entry[X_BL])
+      y_bl = float(entry[Y_BL])
 
-    # iterate through PAGEOBJECT objects, look for PTYPE=''6'
-    print "PAGE INFO:"
-    for obj in root.iter('MASTERPAGE'):
-      px = obj.get('PAGEXPOS')
-      py = obj.get('PAGEYPOS')
-      pw = obj.get('PAGEWIDTH')
-      ph = obj.get('PAGEHEIGHT')
-      bl = obj.get('BORDERLEFT')
-      br = obj.get('BORDERRIGHT')
-      bt = obj.get('BORDERTOP')
-      bb = obj.get('BORDERBOTTOM')
-      print "%s %s %s %s" % (px,py,pw,ph)
-      print "%s %s %s %s" % (bl,br,bt,bb)
+      x_br = float(entry[X_BR])
+      y_br = float(entry[Y_BR])
 
-    print "IMAGE INFO:"
-    for obj in root.iter('PAGEOBJECT'):
-      if obj.get('PTYPE') == '2':
-        x = obj.get('XPOS')
-        y = obj.get('YPOS')
-        w = obj.get('WIDTH')
-        h = obj.get('HEIGHT')
-        print "%s %s %s %s" % (x,y,w,h)
+      x_tr = float(entry[X_TR])
+      y_tr = float(entry[Y_TR])
 
-    # iterate through PAGEOBJECT objects, look for PTYPE=''6'
-    for obj in root.iter('PAGEOBJECT'):
-      if obj.get('PTYPE') == '6':
-        x = obj.get('XPOS')
-        y = obj.get('YPOS')
-        w = obj.get('WIDTH')
-        h = obj.get('HEIGHT')
-        label = obj.get('ANNAME')
-        x = str(float(x) - float(px))
-        y = str(float(y) - float(py))
-        print "%s: %s %s %s %s" % (label,x,y,w,h)
+      x_tl = float(entry[X_TL])
+      y_tl = float(entry[Y_TL])
 
-#       for (0,0) at bottom
-#       aoi = AOI(x,y,w,h-y)
-#       for (0,0) at top
-        aoi = AOI(x,y,w,h)
-        aoi.setAOILabel(label)
-#       aoi.dump()
-#       if aoidict.has_key(stimulus):
-#         aoidict[stimulus].append(aoi)
-#       else:
-#         aoidict[stimulus] = [aoi]
-        aoilist.append(aoi)
+#     for (0,0) at bottom
+#     aoi = AOI(x_bl,y_bl,x_br - x_bl,y_tl - y_bl)
+#     for (0,0) at top
+      aoi = AOI(x_bl,y_bl,x_br - x_bl,y_bl - y_tl)
+#     aoi.dump()
+      if aoidict.has_key(stimulus):
+        aoidict[stimulus].append(aoi)
+      else:
+        aoidict[stimulus] = [aoi]
 
-        del aoi
+      del aoi
 
 # print aoidict
-# for key in aoidict:
-#   print key
-#   print "number of AOIs: ",len(aoidict[key])
-#   for aoi in aoidict[key]:
-#     aoi.dump()
-  print "number of AOIs: ",len(aoilist)
-  for aoi in aoilist:
-    aoi.dump()
+  for key in aoidict:
+    print key
+    print "number of AOIs: ",len(aoidict[key])
+    for aoi in aoidict[key]:
+      aoi.dump()
 
 if __name__ == "__main__":
   main(sys.argv[1:])

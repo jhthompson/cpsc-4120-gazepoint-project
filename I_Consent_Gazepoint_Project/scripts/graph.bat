@@ -1,25 +1,27 @@
 set PYTHON=python
+set WIDTH=1680
+set HEIGHT=1050
+::set WIDTH=2048
+::set HEIGHT=1536
+::set HERTZ=150
+set HERTZ=60
+set DIST=22.44
+set SCREEN=22
+::set XTILES=16
+::set YTILES=12
+REM set XTILES=4
+REM set YTILES=2
 
 REM use Butterworth?
 set SMOOTH=False
 
-set WIDTH=1024
-set HEIGHT=768
-set HERTZ=500
-set DIST=23.62
-set SCREEN=19
-
-set BASELINE_T=2.0
-set END_T=180.0
-
-set XTILES=16
-set YTILES=16
-
-set INDIR=../../data/tutorial_etra18/
-set IMGDIR=../../stimulus/static/screenshots/
+set INDIR=../result/
+set IMGDIR=../src/static/
 
 set PLTDIR=./plots/
 set OUTDIR=./data/
 set RAWDIR=./data/raw/
 
-%PYTHON% ./graph.py --smooth=%SMOOTH% --indir=%RAWDIR% --imgdir=%IMGDIR% --dist=%DIST% --screen=%SCREEN% --width=%WIDTH% --height=%HEIGHT% --hertz=%HERTZ% --xtiles=%XTILES% --ytiles=%YTILES% --baselineT=%BASELINE_T% --endT=%END_T% --outdir=%OUTDIR% --pltdir=%PLTDIR% --image="grey-1280x1024.png"
+REM process
+REM graph.py knows xtiles and ytiles for each image and its corresponding AOIs
+%PYTHON% graph.py --smooth=%SMOOTH% --indir=%RAWDIR% --imgdir=%IMGDIR% --dist=%DIST% --screen=%SCREEN% --width=%WIDTH% --height=%HEIGHT% --hertz=%HERTZ% --outdir=%OUTDIR% --pltdir=%PLTDIR%
