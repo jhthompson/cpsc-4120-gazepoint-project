@@ -283,6 +283,7 @@ def main(argv):
     if imagebase == 'calibration-verification-image':
       imagebase = "composite-grid-1680x1050"
       cond = 'calib-verif'
+      aoifile = "calibration_verification.sla"
     elif imagebase == 'page1':
       imagebase = "page1-811x1050"
       cond = 'page1'
