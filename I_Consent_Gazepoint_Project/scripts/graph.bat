@@ -5,12 +5,12 @@ set HEIGHT=1050
 ::set HEIGHT=1536
 ::set HERTZ=150
 set HERTZ=60
-set DIST=25.59
+set DIST=22.44
 set SCREEN=22
 ::set XTILES=16
 ::set YTILES=12
-set XTILES=4
-set YTILES=2
+REM set XTILES=4
+REM set YTILES=2
 
 REM use Butterworth?
 set SMOOTH=False
@@ -23,4 +23,5 @@ set OUTDIR=./data/
 set RAWDIR=./data/raw/
 
 REM process
-%PYTHON% graph.py --smooth=%SMOOTH% --indir=%RAWDIR% --imgdir=%IMGDIR% --dist=%DIST% --screen=%SCREEN% --width=%WIDTH% --height=%HEIGHT% --hertz=%HERTZ% --xtiles=%XTILES% --ytiles=%YTILES% --outdir=%OUTDIR% --pltdir=%PLTDIR%
+REM graph.py knows xtiles and ytiles for each image and its corresponding AOIs
+%PYTHON% graph.py --smooth=%SMOOTH% --indir=%RAWDIR% --imgdir=%IMGDIR% --dist=%DIST% --screen=%SCREEN% --width=%WIDTH% --height=%HEIGHT% --hertz=%HERTZ% --outdir=%OUTDIR% --pltdir=%PLTDIR%

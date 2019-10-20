@@ -131,12 +131,12 @@ def main(argv):
   # Enable/disable butterworth smoothing.
   smooth = False
   # screen height in pixels
-  width = 1600
-  height = 900
+  width = 1680
+  height = 1050
   # screen diagonal (in inches)
-  screen = 17
+  screen = 22
   # viewing distance (in inches)
-  dist = 23.62
+  dist = 22.44
   # sampling rate
   herz = 60.0
   # smoothing (Butterworth) filter parameters: degree, cutoff
@@ -224,10 +224,10 @@ def main(argv):
       screen = float(arg)
     elif opt == '--dist':
       dist = float(arg)
-    elif opt == '--xtiles':
-      xtiles = int(arg)
-    elif opt == '--ytiles':
-      ytiles = int(arg)
+    # elif opt == '--xtiles':
+    #   xtiles = int(arg)
+    # elif opt == '--ytiles':
+    #   ytiles = int(arg)
     elif opt == '--file':
       file = arg
     elif opt == '--image':
@@ -266,6 +266,7 @@ def main(argv):
   lagrange = Lagrange(int(width),int(height))
 
   for file in files:
+    print(files)
     scanpath = Scanpath()
     scanpath.parseFile(file,width,height,herz)
 
@@ -275,35 +276,49 @@ def main(argv):
 
     subj, ext = os.path.splitext(base.split('_')[0])
 
+    aoifile = "NONE"
+
     # extract stimulus name
     imagebase, ext = os.path.splitext(base.split('_')[1])
-    if imagebase == 'p1':
-      imagebase = "puntos-1680x1050"
-      cond = 'p1'
-    elif imagebase == 'p3':
-      imagebase = "puntos-1680x1050"
-      cond = 'p3'
-    elif imagebase == 'p2':
-      imagebase = "painting-1680x1050"
-      cond = 'p2'
-    elif imagebase == 'grid':
-      imagebase = "composite-1680x1050"
-      cond = 'grid'
-    imagebase = "page1-811x1050"
+    if imagebase == 'calibration-verification-image':
+      imagebase = "composite-grid-1680x1050"
+      cond = 'calib-verif'
+    elif imagebase == 'page1':
+      imagebase = "page1-811x1050"
+      cond = 'page1'
+      aoifile = "consent_page1.sla"
+    elif imagebase == 'page2':
+      imagebase = "page2-811x1050"
+      cond = 'page2'
+      aoifile = "consent_page2.sla"
+    elif imagebase == 'page3':
+      imagebase = "page3-811x1050"
+      cond = 'page3'
+      aoifile = "consent_page3.sla"
+    elif imagebase == 'page4':
+      imagebase = "page4-811x1050"
+      cond = 'penn-state'
+    else:
+      # if stimulus not in this list, not interested in this image (instruction page)
+      imagebase = "NONE"
+      cond = "NONE"
+      aoifile = "NONE"
 
+    if(aoifile == "NONE"):
+      continue
+    
     print "Image: ", image, "[", imagebase, "]"
 
+    aoidir = "../src/scribus-AOIs/"
 
-    # process AOI file
-    aoidir = "../src/scribus-AOIs"
-    aoifile = aoidir + imagebase + ".sla"
-    aoifile = "consent_page1.sla"
-    print "aoifile = ", aoifile
+    aoifilepath = aoidir + aoifile
+
+    print "aoifile = ", aoifilepath
 
     aoidict = {}
     aoilist = []
 
-    parseAOI(aoifile,aoilist)
+    parseAOI(aoifilepath,aoilist)
 
 #   print aoidict
 #   for key in aoidict:
@@ -430,13 +445,13 @@ def main(argv):
                             image,\
                             xtiles,ytiles)
 
-#   plotter.renderAmfocFixations("%s/%s-%s" % (pltdir,filename,"affx"),\
-#                           width,height,\
-#                           scanpath.fixations,\
-#                           scanpath.K,\
-#                           "Ambient/Focal Fixations",\
-#                           image,\
-#                           xtiles,ytiles)
+    plotter.renderAmfocFixations("%s/%s-%s" % (pltdir,filename,"affx"),\
+                            width,height,\
+                            scanpath.fixations,\
+                            scanpath.K,\
+                            "Ambient/Focal Fixations",\
+                            image,\
+                            xtiles,ytiles)
 
 #   plotter.renderCalibFixations("%s/%s-%s" % (pltdir,filename,"clbf"),\
 #                           width,height,\
