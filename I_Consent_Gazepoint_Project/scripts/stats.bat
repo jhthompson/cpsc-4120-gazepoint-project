@@ -1,4 +1,4 @@
-set R="C:\Program Files\R\R-3.6.1\bin\R.exe"
+set R="C:\Program Files\R\R-3.5.0\bin\R.exe"
 
 ::set XTILES=16
 ::set YTILES=12
