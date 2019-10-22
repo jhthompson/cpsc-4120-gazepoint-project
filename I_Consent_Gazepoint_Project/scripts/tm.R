@@ -10,15 +10,15 @@ source("TMSP.R") # load custom functions
 args <- commandArgs(trailingOnly = TRUE)
 #print(args)
 
-xtiles <- as.integer(args[1])
-ytiles <- as.integer(args[2])
+xtiles <- 4#as.integer(args[1])
+ytiles <- 2#as.integer(args[2])
 print(sprintf("xtiles = %d, ytiles = %d\n",xtiles,ytiles))
 
 M <- zeroTM(xtiles,ytiles)
 
 df <- read.csv("aois.csv") # open data
 
-ddf <- df[which(df$cond == "p1"), ] # select condition
+ddf <- df[which(df$cond == "calib-verif"), ] # select condition
 ddf
 M_p1 <- TransMatrix(M,data=ddf,
                     AOInamesVar="AOI",
@@ -34,6 +34,7 @@ sen_p1 <- StationaryEntropy(M,data=ddf,
                     AOInamesVar="AOI",
                     SubjectsVar="subj",
                     FixOrderVar="order")
+
 sen_p1 <- STentrop
 TransPlot2(transMatrix=M_p1,
            plotName="TM_p1.pdf",

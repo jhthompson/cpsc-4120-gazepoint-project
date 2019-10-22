@@ -41,7 +41,7 @@ bargraph.CI(stimulus,
             xlab = "Stimulus",
             ylab = "Fixation Duration (sec; with SE)",
             cex.lab = 1.2,
-            names.arg = c("painting","puntos"),
+           # names.arg = c("consent form"),
             cex.names = 1.1,
             main = "Fixation Duration in AOIs vs. Image Type"
 )

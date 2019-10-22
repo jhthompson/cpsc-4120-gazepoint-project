@@ -41,17 +41,18 @@ Type 'q()' to quit R.
 
 Error: subj
          Df Sum Sq Mean Sq
-stimulus  2  1.115  0.5574
+stimulus  2    2.9    1.45
 
 Error: subj:stimulus
-          Df  Sum Sq Mean Sq
-stimulus   2 0.02139 0.01069
-aoi_label  4 0.19344 0.04836
+          Df Sum Sq Mean Sq F value Pr(>F)
+stimulus   3 2.3936  0.7979   3.802  0.215
+aoi_label  4 0.3594  0.0898   0.428  0.787
+Residuals  2 0.4198  0.2099               
 
 Error: Within
-           Df Sum Sq Mean Sq F value Pr(>F)
-aoi_label   9  0.112 0.01243   0.697  0.712
-Residuals 989 17.642 0.01784               
+            Df Sum Sq Mean Sq F value Pr(>F)
+aoi_label    9   0.11 0.01243   0.328  0.966
+Residuals 1222  46.29 0.03788               
 > #print(model.tables(fit_type1,"means"),digits=3)
 > pairwise.t.test(duration, stimulus, paired=FALSE, p.adjust="bonf")
 
@@ -59,14 +60,19 @@ Residuals 989 17.642 0.01784
 
 data:  duration and stimulus 
 
-      page1 page2
-page2 1     -    
-page3 1     1    
+      calibration page1 page2
+page1 3.0e-14     -     -    
+page2 4.0e-10     1     -    
+page3 5.7e-06     1     1    
 
 P value adjustment method: bonferroni 
 > describeBy(x=duration,group=stimulus)
 
  Descriptive statistics by group 
+group: calibration
+   vars   n mean   sd median trimmed  mad  min  max range skew kurtosis   se
+X1    1 236 0.26 0.36   0.13    0.18 0.15 0.01 2.42   2.4 2.64     8.44 0.02
+------------------------------------------------------------ 
 group: page1
    vars   n mean   sd median trimmed mad  min  max range skew kurtosis   se
 X1    1 601 0.14 0.13    0.1    0.12 0.1 0.01 1.03  1.02 2.34     8.97 0.01
