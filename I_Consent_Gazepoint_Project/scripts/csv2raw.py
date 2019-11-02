@@ -62,7 +62,9 @@ def csv2raw(infile,outdir):
       stimulus = entry[MEDIA_NAME]
 
       # parse the subject name from the file name
-      subj = filename[:filename.find('_')]
+      subj = filename.split('_')[1]
+      cond = filename.split('_')[0]
+      print(cond)
 
       # new stimulus, open new file
       print 'Processing: ' + subj + ' (' + stimulus + ')'
@@ -70,7 +72,7 @@ def csv2raw(infile,outdir):
       if outfile is not None:
         outfile.close()
 
-      outfile = open(outdir + subj + '_' + stimulus + '.raw','w+')
+      outfile = open(outdir + cond + '_' + subj + '_' + stimulus + '.raw','w+')
 
       # reset coords
       x = ''
@@ -127,7 +129,7 @@ def main(argv):
 
   # get .csv input files to process
   if os.path.isdir(indir):
-    files = glob.glob('%s/User*_all_gaze.csv' % (indir))
+    files = glob.glob('%s/*User*_all_gaze.csv' % (indir))
 
   # if user specified --file="..." then we use that as the only one to process
   if(file != None and os.path.isfile(file)):
