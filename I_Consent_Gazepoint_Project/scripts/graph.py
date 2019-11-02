@@ -330,12 +330,14 @@ def main(argv):
 
     parseAOI(aoifilepath,aoilist)
 
-#   print aoidict
-#   for key in aoidict:
-#     print key
-#     print "number of AOIs: ",len(aoidict[key])
-#     for aoi in aoidict[key]:
-#       aoi.dump()
+    #print('length is' + str(aoilist[0].getAOILabel()))
+
+    # print aoidict
+    # for key in aoidict:
+    #   print key
+    #   print "number of AOIs: ",len(aoidict[key])
+    #   for aoi in aoidict[key]:
+    #     aoi.dump()
 
 
     print "subj, cond: ", subj, cond
