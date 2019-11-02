@@ -652,7 +652,7 @@ class Scanpath:
     # from: http://resources.esri.com/help/9.3/ArcGISengine/java/Gp_ToolRef/spatial_statistics_tools/how_average_nearest_neighbor_distance_spatial_statistics_works.htm
 
     outfile = open(fileName,'w')
-    str = "subj,cond,stim,ann\n"
+    str = "subj,cond,stim,ann,zann\n"
     outfile.write(str)
 
     # diagonal
