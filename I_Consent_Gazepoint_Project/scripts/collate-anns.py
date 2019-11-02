@@ -12,6 +12,7 @@ class Header:
 def catCSVFile(infile,df,ct):
   try:
     f = open(infile,'r')
+    #print("ann processing: "+ str(f))
   except IOError:
     print "Can't open file: " + infile
     return
@@ -33,8 +34,8 @@ def catCSVFile(infile,df,ct):
     ANN       = entry[Header.ANN]
 
     # dump out line excluding "trial"
-    str = "%s,%s,%s,%s,%s" % (subj,cond,stim,NNI,ANN)
-    print >> df,str
+    string = "%s,%s,%s,%s,%s" % (subj,cond,stim,NNI,ANN)
+    print >> df,string
     ct += 1
 
   return ct

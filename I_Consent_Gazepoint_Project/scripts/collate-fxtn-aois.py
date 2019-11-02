@@ -14,12 +14,12 @@ def catCSVFile(infile,df,ct):
   print "Processing: ", infile, "[", base, "]"
 
   # extract stimulus name and subj id
-  stimulus = base.split('_')[1].split('-')[0]
-  subj = base.split('_')[0]
-  if stimulus == 'p1' or stimulus == 'p3':
-    stimulus = "puntos1016x1536"
-  elif stimulus == 'p2':
-    stimulus = "painting1016x1536"
+  stimulus = base.split('_')[2]
+  subj = base.split('_')[1]
+  #if stimulus == 'p1' or stimulus == 'p3':
+  #  stimulus = "puntos1016x1536"
+  #elif stimulus == 'p2':
+  #  stimulus = "painting1016x1536"
   print "stim = ", stimulus
   print "subj = ", subj
 

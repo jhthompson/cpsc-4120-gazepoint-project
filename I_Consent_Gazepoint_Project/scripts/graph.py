@@ -284,25 +284,30 @@ def main(argv):
     #print('imgbase: ' + imagebase)
     #print(ext)
 
+    # extract condition name
+    cond, ext = os.path.splitext(base.split('_')[0])
+    #print('cond: ' + cond)
+    #print(ext)
+
     if imagebase == 'calibration-verification-image':
       imagebase = "composite-grid-1680x1050"
-      cond = 'calib-verif'
+      stim = 'calib-verif'
       aoifile = "calibration_verification.sla"
     elif imagebase == 'page1':
       imagebase = "page1-811x1050"
-      cond = 'page1'
+      stim = 'page1'
       aoifile = "consent_page1.sla"
     elif imagebase == 'page2':
       imagebase = "page2-811x1050"
-      cond = 'page2'
+      stim = 'page2'
       aoifile = "consent_page2.sla"
     elif imagebase == 'page3':
       imagebase = "page3-811x1050"
-      cond = 'page3'
+      stim = 'page3'
       aoifile = "consent_page3.sla"
     elif imagebase == 'page4':
       imagebase = "page4-811x1050"
-      cond = 'penn-state'
+      stim = 'penn-state'
     else:
       # if stimulus not in this list, not interested in this image (instruction page)
       imagebase = "NONE"
@@ -354,7 +359,7 @@ def main(argv):
     scanpath.amfoc("%s/%s-amfo%s" % (outdir,filename,".dat"),\
                             width,height)
     scanpath.gridify("%s/%s-aois%s" % (outdir,filename,".csv"),\
-                            subj,cond,width,height,xtiles,ytiles)
+                            subj,stim,width,height,xtiles,ytiles)
 
     scanpath.dumpDAT("%s/%s%s" % (outdir,filename,".dat"),width,height)
 
@@ -363,7 +368,7 @@ def main(argv):
                         aoilist)
 
     scanpath.ann("%s/%s-ann%s" % (outdir,filename,".csv"),\
-                        subj,cond, imagebase,width,height)
+                        subj,cond,stim,width,height)
 #   scanpath.dumpXML("%s/%s%s" % (outdir,filename,".xml"),width,height)
 
 #   plotter.renderPoints1D("%s/%s-%s" % (pltdir,filename,"gzpt"),\
