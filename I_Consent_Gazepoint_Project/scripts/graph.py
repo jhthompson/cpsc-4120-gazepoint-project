@@ -274,12 +274,16 @@ def main(argv):
 
     print "Processing: ", file, "[", base, "]"
 
-    subj, ext = os.path.splitext(base.split('_')[0])
-
+    subj, ext = os.path.splitext(base.split('_')[1])
+    #print('subj: ' + subj)
+    #print('ext: ' + ext)
     aoifile = "NONE"
 
     # extract stimulus name
-    imagebase, ext = os.path.splitext(base.split('_')[1])
+    imagebase, ext = os.path.splitext(base.split('_')[2])
+    #print('imgbase: ' + imagebase)
+    #print(ext)
+
     if imagebase == 'calibration-verification-image':
       imagebase = "composite-grid-1680x1050"
       cond = 'calib-verif'
