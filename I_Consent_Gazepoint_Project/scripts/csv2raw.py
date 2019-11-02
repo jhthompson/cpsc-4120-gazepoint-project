@@ -64,7 +64,7 @@ def csv2raw(infile,outdir):
       # parse the subject name from the file name
       subj = filename.split('_')[1]
       cond = filename.split('_')[0]
-      print(cond)
+      #print(cond)
 
       # new stimulus, open new file
       print 'Processing: ' + subj + ' (' + stimulus + ')'
