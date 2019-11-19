@@ -1,0 +1,17 @@
+subj,cond,AOI,duration,order
+User 35,calib-verif,ac,0.131780,1
+User 35,calib-verif,ac,1.579100,2
+User 35,calib-verif,ab,0.016480,3
+User 35,calib-verif,ac,0.328310,4
+User 35,calib-verif,ac,1.428520,5
+User 35,calib-verif,bb,0.196960,6
+User 35,calib-verif,bb,0.756170,7
+User 35,calib-verif,bb,0.507140,8
+User 35,calib-verif,cb,1.675720,9
+User 35,calib-verif,cb,1.775140,10
+User 35,calib-verif,ac,3.186340,11
+User 35,calib-verif,ac,3.121950,12
+User 35,calib-verif,bc,3.562860,13
+User 35,calib-verif,ab,3.350410,14
+User 35,calib-verif,ab,3.367800,15
+User 35,calib-verif,bb,3.420890,16

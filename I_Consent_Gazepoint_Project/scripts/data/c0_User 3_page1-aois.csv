@@ -1,0 +1,8 @@
+subj,cond,AOI,duration,order
+User 3,page1,bc,0.015800,1
+User 3,page1,bc,0.016760,2
+User 3,page1,bc,0.032380,3
+User 3,page1,ac,0.013820,4
+User 3,page1,bc,0.247710,5
+User 3,page1,ba,0.032930,6
+User 3,page1,ca,0.016150,7
