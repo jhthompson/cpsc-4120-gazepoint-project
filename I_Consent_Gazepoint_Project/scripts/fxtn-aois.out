@@ -41,17 +41,19 @@ Type 'q()' to quit R.
 
 Error: subj
          Df Sum Sq Mean Sq
-stimulus  2  1.115  0.5574
+stimulus  3  3.155   1.052
 
 Error: subj:stimulus
-          Df  Sum Sq Mean Sq
-stimulus   2 0.02139 0.01069
-aoi_label  4 0.19344 0.04836
+          Df Sum Sq Mean Sq
+stimulus   3 0.6574  0.2191
+aoi_label  9 1.1523  0.1280
 
 Error: Within
-           Df Sum Sq Mean Sq F value Pr(>F)
-aoi_label   9  0.112 0.01243   0.697  0.712
-Residuals 989 17.642 0.01784               
+            Df Sum Sq Mean Sq F value   Pr(>F)    
+aoi_label   23   1.30 0.05652   2.432 0.000176 ***
+Residuals 1525  35.44 0.02324                     
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 > #print(model.tables(fit_type1,"means"),digits=3)
 > pairwise.t.test(duration, stimulus, paired=FALSE, p.adjust="bonf")
 
@@ -59,25 +61,34 @@ Residuals 989 17.642 0.01784
 
 data:  duration and stimulus 
 
-      page1 page2
-page2 1     -    
-page3 1     1    
+                   calibration-verification-image-fxtn-aoi.csv
+page1-fxtn-aoi.csv 9.2e-08                                    
+page2-fxtn-aoi.csv 0.0016                                     
+page3-fxtn-aoi.csv 0.0011                                     
+                   page1-fxtn-aoi.csv page2-fxtn-aoi.csv
+page1-fxtn-aoi.csv -                  -                 
+page2-fxtn-aoi.csv 1.0000             -                 
+page3-fxtn-aoi.csv 1.0000             1.0000            
 
 P value adjustment method: bonferroni 
 > describeBy(x=duration,group=stimulus)
 
  Descriptive statistics by group 
-group: page1
-   vars   n mean   sd median trimmed mad  min  max range skew kurtosis   se
-X1    1 601 0.14 0.13    0.1    0.12 0.1 0.01 1.03  1.02 2.34     8.97 0.01
------------------------------------------------------------- 
-group: page2
+group: calibration-verification-image-fxtn-aoi.csv
    vars   n mean   sd median trimmed  mad  min  max range skew kurtosis   se
-X1    1 288 0.14 0.13   0.12    0.12 0.12 0.01 0.85  0.84 2.05      5.7 0.01
+X1    1 337 0.18 0.24   0.08    0.12 0.09 0.01 1.64  1.63 2.85    10.08 0.01
 ------------------------------------------------------------ 
-group: page3
+group: page1-fxtn-aoi.csv
+   vars   n mean   sd median trimmed  mad  min  max range skew kurtosis se
+X1    1 763 0.12 0.13   0.08    0.09 0.08 0.01 1.03  1.02 2.71    11.24  0
+------------------------------------------------------------ 
+group: page2-fxtn-aoi.csv
+   vars   n mean   sd median trimmed  mad  min  max range skew kurtosis   se
+X1    1 331 0.13 0.15    0.1     0.1 0.09 0.02 1.53  1.52 3.99     25.2 0.01
+------------------------------------------------------------ 
+group: page3-fxtn-aoi.csv
    vars   n mean   sd median trimmed mad  min  max range skew kurtosis   se
-X1    1 118 0.15 0.18   0.11    0.11 0.1 0.01 1.26  1.25 3.67    16.48 0.02
+X1    1 133 0.11 0.11    0.1     0.1 0.1 0.01 0.86  0.84    3     16.6 0.01
 > 
 > pdf.options(family="NimbusSan",useDingbats=FALSE)
 > plotName = "./duration-CI.pdf"

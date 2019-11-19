@@ -12,7 +12,7 @@ stimmeans <- cast(mdf, stim~variable, mean)
 
 #subj,cond,stim,ann
 # calculate anova
-#ezANOVA(data=df, dv=ann, wid=subj, within=cond, type=3)
+ezANOVA(data=df, dv=ann, wid=subj, within=cond, type=3)
 df$subj <- factor(df$subj)
 df$cond <- factor(df$cond)
 df$stim <- factor(df$stim)
@@ -55,11 +55,11 @@ bargraph.CI(stim, nni, group = NULL, data = df,
             main = "NNI z-score vs. Stimulus"
 )
 dev.off()
-embedFonts(plotName, "pdfwrite", outfile = plotName,
-  fontpaths =
-  c("/sw/share/texmf-dist/fonts/type1/urw/helvetic",
-    "/usr/share/texmf/fonts/type1/urw/helvetic",
-    "/usr/local/teTeX/share/texmf-dist/fonts/type1/urw/helvetic",
-    "/opt/local/share/texmf-texlive/fonts/type1/urw/helvetic",
-    "/usr/share/texmf-texlive/fonts/type1/urw/helvetic",
-    "/usr/local/texlive/texmf-local/fonts/type1/urw/helvetic"))
+# embedFonts(plotName, "pdfwrite", outfile = plotName,
+#   fontpaths =
+#   c("/sw/share/texmf-dist/fonts/type1/urw/helvetic",
+#     "/usr/share/texmf/fonts/type1/urw/helvetic",
+#     "/usr/local/teTeX/share/texmf-dist/fonts/type1/urw/helvetic",
+#     "/opt/local/share/texmf-texlive/fonts/type1/urw/helvetic",
+#     "/usr/share/texmf-texlive/fonts/type1/urw/helvetic",
+#     "/usr/local/texlive/texmf-local/fonts/type1/urw/helvetic"))
