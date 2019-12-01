@@ -9,7 +9,7 @@ files <- list.files(path="./data", pattern = "-amfo.dat")#[1:3]
 std <- function(x) sd(x)/sqrt(length(x))
 
 #data <- read.table("./data/c1_User 2_page1-amfo.dat", sep = "", col.names = c("time", 'K'))
-
+#file <- files[1]
 for(file in files) {
   file.info <- strsplit(file, "_")
   condition <- file.info[[1]][1]
@@ -38,12 +38,14 @@ for(file in files) {
         #print(curr.second)
         curr.list <- append(curr.list, K)
       } else {
+        #print("prev second")
+        #print(curr.second)
+        #print("curr time")
+        #print(time)
         k.sums[[curr.second]] <- curr.list
-        curr.second <- curr.second + 1
+        curr.second <- floor(time) + 1 # curr.second + 1 
         curr.list <- list()
       }
-      
-      
     }
     
     # go through each list (which each represent a second of data)
